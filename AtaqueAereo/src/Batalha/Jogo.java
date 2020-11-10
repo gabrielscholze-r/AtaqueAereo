@@ -22,7 +22,7 @@ public class Jogo implements Serializable{
 	public Jogo() {
 		iniciaJogo("Inicio de jogo! Boa Sorte!");
 	}
-	//mÈtodos
+	//m√©todos
 	public void iniciaJogo(String str)
 	{
 		this.mar = new Mar(7,4,5,10);
@@ -180,7 +180,7 @@ public class Jogo implements Serializable{
 			}
 			else
 			{
-				System.out.println("Entrada inv·lida");
+				System.out.println("Entrada inv√°lida");
 			}
 			
 			System.out.println("Deseja jogar novamente (s/n)?");
@@ -201,7 +201,7 @@ public class Jogo implements Serializable{
 	}
 	private void salvaPartida(Jogo jogoAtual) throws FileNotFoundException, IOException
 	{
-		ObjectOutputStream objectOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(jogoAtual.piloto.getNome())));
+		ObjectOutputStream objectOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("Jogo salvo")));
 		objectOut.writeObject(jogoAtual);
 		objectOut.close();
 	}
@@ -221,7 +221,7 @@ public class Jogo implements Serializable{
 			Jogo MeuJogo;
 			Jogo.clearScreen();
 			Scanner reader = new Scanner(System.in);
-			System.out.println("ATAQUE A…REO");
+			System.out.println("ATAQUE A√âREO");
 			System.out.println("Digite 1 para iniciar novo jogo\nDigite 2 para carregar um jogo\nDigite 0 para sair.");
 			int num = reader.nextInt();
 			if (num==0)
@@ -249,7 +249,7 @@ public class Jogo implements Serializable{
 			
 			else
 			{
-				System.out.println("Entrada inv·lida, tente novamente!");
+				System.out.println("Entrada inv√°lida, tente novamente!");
 			}
 			reader.close();
 			Jogo.clearScreen();
