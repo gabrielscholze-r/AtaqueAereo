@@ -8,9 +8,21 @@ public class Posto extends Inimigo{
 	
 	public boolean levarBomba()
 	{
-		this.setMsgBatalha("BOOMM! POSTO atingido! Voc� foi *E L I M I N A D O*");
-		this.setEstado('P');
-		return true;
+		if(this.getEstado() == 'P')
+		{
+			this.setMsgBatalha("CRASH! Caiu nos destroços de um posto");
+			return false;
+		}
+		else
+		{
+			this.setMsgBatalha("BOOMM! POSTO atingido! Você foi *E L I M I N A D O*");
+			this.setEstado('P');
+			return true;
+			
+		}
+		
+		
+		
 		
 	}
 
