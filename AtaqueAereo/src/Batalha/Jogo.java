@@ -76,13 +76,12 @@ public class Jogo implements Serializable{
 		{
 			if (i.getCoord().getX() == x && i.getCoord().getY() == y)
 			{
+				atingiuInimigo = true;
 				inimigo = i;
-				System.out.println(inimigo.getClass().getName());
 				if (inimigo.getClass().getName().equals("Batalha.Posto"))
 				{
 					Posto post = (Posto) inimigo;
 					fimDeJogo = post.levarBomba();
-					System.out.println(fimDeJogo);
 					
 				}
 				else if(inimigo.getClass().getName() == "Batalha.Navio")
@@ -94,10 +93,9 @@ public class Jogo implements Serializable{
 						this.piloto.setQtdNavios(qtdNavios);
 						this.piloto.setPontos(this.piloto.getPontos() + nav.getPontos());
 					}
-					else
-					{
-						fimDeJogo = nav.levarBomba();
-					}
+					fimDeJogo = nav.levarBomba();
+					
+					
 				}
 				else if(inimigo.getClass().getName() == "Batalha.Submarino")
 				{
@@ -108,16 +106,11 @@ public class Jogo implements Serializable{
 						this.piloto.setQtdSubmarinos(qtdSubmarino);
 						this.piloto.setPontos(this.piloto.getPontos() + sub.getPontos());
 					}
-					else
-					{
-						fimDeJogo = sub.levarBomba();
-					}
+					fimDeJogo = sub.levarBomba();
 				}
-				else
-				{
-					atingiuInimigo = true;
-					break;
-				}
+				
+				//break;
+				
 			}
 		}
 		if (atingiuInimigo == false)
@@ -127,7 +120,7 @@ public class Jogo implements Serializable{
 			
 			
 		}
-		this.mensagem =  "(" + x + ", " + y + ") " + inimigo.getMsgBatalha();
+		this.mensagem =  "(" + y + ", " + x + ") " + inimigo.getMsgBatalha();
 		this.piloto.setDisparos(this.piloto.getDisparos()+1);
 		return fimDeJogo;
 		
@@ -176,16 +169,14 @@ public class Jogo implements Serializable{
 			if (resp.equals("s") || resp.equals("S"))
 			{
 				salvaPartida(this);
-				
 			}
-			else
+			else if (!resp.equals("s") || !resp.equals("S"))
 			{
-				System.out.println("Entrada inválida");
+				System.out.println("Entrada inválida! Jogo não foi salvo");
 			}
-			
 			System.out.println("Deseja jogar novamente (s/n)?");
-			String resp2 = leitor.next();
-			if (resp2.equals("s") || resp2.equals("S"))
+			resp = leitor.next();
+			if (resp.equals("s") || resp.equals("S"))
 			{
 				iniciaJogo("NOVO jogo! Boa sorte!");
 				iniciaPiloto();
@@ -193,8 +184,11 @@ public class Jogo implements Serializable{
 				fimDeJogo = false;
 					
 			}
-			else {continuar = false;
-			this.fim = true;}
+			else
+			{
+				continuar = false;
+				fim = false;
+			}
 			
 		}
 
@@ -253,6 +247,7 @@ public class Jogo implements Serializable{
 			}
 			reader.close();
 			Jogo.clearScreen();
+			x = false;
 			System.out.println("Fim de jogo!");
 		}
 		
